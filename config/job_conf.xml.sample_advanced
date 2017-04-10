@@ -108,7 +108,7 @@
                scratch directory available on compute). -->
           <!-- Specify a complete description of the Pulsar app
                to create. If this configuration defines more than
-               one manager - you can specify the manager name 
+               one manager - you can specify the manager name
                using the "manager" destination parameter. For more
                information on configuring a Pulsar app see:
 
@@ -220,6 +220,7 @@
         </plugin>
 
     </plugins>
+
     <handlers default="handlers">
         <!-- Additional job handlers - the id should match the name of a
              [server:<id>] in galaxy.ini.
@@ -239,6 +240,7 @@
         <handler id="special_handler1" tags="special_handlers"/>
         <handler id="trackster_handler"/>
     </handlers>
+
     <destinations default="local">
         <!-- Destinations define details about remote resources and how jobs
              should be executed on those remote resources.
@@ -333,7 +335,7 @@
                will be removed automatically after the program is complete.
           -->
           <!-- <param id="docker_auto_rm">true</param> -->
-          <!-- Override which user to launch Docker container as - defaults to 
+          <!-- Override which user to launch Docker container as - defaults to
                Galaxy's user id. For remote job execution (e.g. Pulsar) set to
                remote job user. Leave empty to not use the -u argument with
                Docker. -->
@@ -564,8 +566,8 @@
                     <container type="docker">bgruening/galaxy-stable</container>
                 </requirements>
 
-            Unless the job destination specifies an override 
-            with docker_container_id_override. If neither of 
+            Unless the job destination specifies an override
+            with docker_container_id_override. If neither of
             these is set a default container can be specified
             with docker_default_container_id. The resolved
             container ID will be passed along to condor as
@@ -603,7 +605,7 @@
              handler will be reused for the resubmitted job. The ``destination`` attriubte
              is optional, if not present the job's original destination will be reused for the
              re-submission. The ``delay`` attribute is optional, if present it will cause the job to
-             delay for that number of seconds before being re-submitted. 
+             delay for that number of seconds before being re-submitted.
         -->
         <destination id="short_fast" runner="slurm">
             <param id="nativeSpecification">--time=00:05:00 --nodes=1</param>
@@ -693,12 +695,12 @@
             <param id="docker_default_container_id">centos:latest</param>
             <!-- Specify the image on which the jobs have to be executed -->
             <param id="godocker_volumes"></param>
-            <!-- Mount the godocker volumes 
+            <!-- Mount the godocker volumes
                  volumes must be separated by commas.
                  eg: <param id="godocker_volumes">home,galaxy</param>
             -->
             <param id="virtualenv">false</param>
-            <!-- If a tool execution in container requires galaxy virtualenv, 
+            <!-- If a tool execution in container requires galaxy virtualenv,
                  then enable it by setting the value to true.
                  Disable venv by setting the value to false.
             -->
@@ -712,6 +714,7 @@
         <expand macro="foohost_destination" id="foo_large" ncpus="8" walltime="24:00:00" />
         <expand macro="foohost_destination" id="foo_longrunning" ncpus="1" walltime="48:00:00" />
     </destinations>
+
     <resources default="default">
       <!-- Group different parameters defined in job_resource_params_conf.xml
            together and assign these groups ids. Tool section below can map
@@ -721,6 +724,7 @@
       <group id="memoryonly">memory</group>
       <group id="all">processors,memory,time,project</group>
     </resources>
+
     <tools>
         <!-- Tools can be configured to use specific destinations or handlers,
              identified by either the "id" or "tags" attribute.  If assigned to
@@ -741,6 +745,7 @@
         -->
         <tool id="my-tool" destination="my-tool-container"/>
     </tools>
+
     <limits>
         <!-- Certain limits can be defined. The 'concurrent_jobs' limits all
              control the number of jobs that can be "active" at a time, that
@@ -796,6 +801,7 @@
         -->
         <limit type="output_size">10GB</limit>
     </limits>
+
     <macros>
         <xml name="foohost_destination" tokens="id,walltime,ncpus">
             <destination id="@ID@" runner="cli">
